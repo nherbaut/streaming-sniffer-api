@@ -6,8 +6,16 @@ import sqlalchemy
 @app.route("/<email>/logs",methods=['GET'])
 def list_logs_for_user(email):
     u=db.session.query(User).filter_by(email=email).first()
-    res="<br>".join(["{};{};{}".format(p.ip,p.content_id,p.timestamp) for p in u.posts])
+    res="#ip;content_id;date<br>"
+    res+="<br>".join(["{};<a href='https://www.youtube.com/watch?v={}'>{}</a>;{}".format(p.ip,p.content_id,p.content_id,p.timestamp) for p in u.posts])
     return make_response(res, 200)
+
+@app.route("/",methods=['GET'])
+def list_users():
+    out="\n".join(["<a href='"+u.email+"/logs' > "+u.email+"</a><br>" for u in db.session.query(User).all()])
+    return make_response(out, 200)
+
+
 
 @app.route("/<email>",methods=['POST'])
 def create_user(email):
