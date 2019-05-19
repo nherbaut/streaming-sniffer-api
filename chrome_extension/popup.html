@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      button {
+        height: 30px;
+        width: 300px;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="configured" style="display:none">
+    <div>Configured email: <span id="email" ></span></div>
+    <button id="changeColor">Grab Streming Info</button>
+    <div id="logslink" > <a href="#">check your logs here</a></div>
+    <script src="popup.js"></script>
+  </div>
+  <div id="not-configured" style="display:none">
+      <label for="name">Type in your email</label>
+      <input type="text" id="name" name="name" required minlength="4" maxlength="64" size="36" />
+      <input type="submit" id="submit" />
+
+  </div>
+
+    
+  </body>
+</html>
