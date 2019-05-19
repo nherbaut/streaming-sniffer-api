@@ -20,6 +20,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 function load_popup(data){
 
+  
   if('email' in data){
 
     document.getElementById("configured").style.display="inline";
@@ -40,7 +41,6 @@ function load_popup(data){
             tabs[0].id,
             {code:`
             for(let a of document.querySelectorAll("#content #contents #contents a#thumbnail")){
-              console.log(a.href.substring(32,43));
               const xhr = new XMLHttpRequest();
               xhr.open('POST', 'https://streaming-sniffer-api.nextnet.top/`+data.email+`/'+a.href.substring(32,43));
               xhr.send();
@@ -63,7 +63,9 @@ function load_popup(data){
           xhr.send();
           xhr.onreadystatechange=function(){
             if (xhr.readyState==4 && xhr.status==200){
-              load_popup(data);
+              chrome.storage.sync.get(['email'], function(data2) {
+                load_popup(data2);
+              });
             }
           };
         });
